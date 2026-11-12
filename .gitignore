@@ -1,0 +1,17 @@
+.env
+.env.*
+!.env.example
+data/
+*.session
+*.session-journal
+*.db
+*.db-*
+*.sqlite*
+prompts/system.md
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+.idea/
+.vscode/

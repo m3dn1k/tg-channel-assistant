@@ -1,0 +1,22 @@
+services:
+  bot:
+    build: .
+    image: tg-channel-assistant
+    container_name: tg-channel-assistant
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      - ./data:/app/data
+      # свой промпт без пересборки: положите prompts/system.md и задайте PROMPT_FILE=/app/prompts/system.md
+      - ./prompts:/app/prompts:ro
+    # вход в Telegram: docker compose run --rm bot python -m app.qrlogin
+    stdin_open: true
+    tty: true
+    # для Ollama на хосте: OLLAMA_URL=http://host.docker.internal:11434
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
